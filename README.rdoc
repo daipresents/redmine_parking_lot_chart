@@ -1,0 +1,22 @@
+= redmine_parking_lot_chart
+アジャイルな見積りと計画づくりに登場する、テーマやストーリーの完了状況を可視化したツールをRedmineにそそぎこむ。
+(Parking lot chart appears in the Agile estimating and planning. This chart makes the theme and the story visible. I try to create redmine plugin for agile development tool.)
+
+ロードマップという機能が存在するが、縦に長いページだと状況がわかりずらい。モバイルページと同じく、1画面でできるだけ多くの情報をわかりやすく表示するためにプラグインを作ってみる。
+(Redmine Roadmap is wonderful feature. but if threre are a lot of version, roadmap page is became very long page. So parking lot chart plugin offers the feature to display a lot of information on one screen.)
+
+作者は英語が得意ではありません。
+(The author is not good at English.Sorry..)
+
+== Details
+- 開発中です。(Now developing.)
+
+== Plugin Instration
+- 開発中です。(Now developing.)
+
+== Note
+- This plugin works only Redmine 0.9.0 or higher.
+
+== License
+This plugin is licensed under GNU General Public License version 3.
+

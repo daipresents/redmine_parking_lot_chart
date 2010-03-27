@@ -1,0 +1,8 @@
+en:
+  parking_lot_chart: "Parking Lot Chart"
+  parking_lot_chart_closed: "Closed "
+  parking_lot_chart_open: "Open "
+  parking_lot_chart_estimated_hours: "Estimated Hours"
+  parking_lot_chart_effective_date: "Effective Date"
+
+  parking_lot_chart_project_not_found: "Project Not Found. Project id:{{project_id}}"

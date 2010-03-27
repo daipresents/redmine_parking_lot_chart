@@ -1,0 +1,36 @@
+<% html_title "#{@project.name} - " + l(:parking_lot_chart) -%>
+
+<% @chart_data.each do |data| %>
+  <div style="margin:5px; padding:2px; width:15em; float:left; text-align: center; background-color: #ffffcf; border: 1px solid #ffff55">
+    <div style="font-size:1.2em; font-weight:bold; width:100%; border-bottom: 1px solid #ffff55">
+      <%= link_to data.name, {:controller => 'versions', :action => 'show', :id => data.id} %>
+    </div>
+    <div>
+      <%= l(:parking_lot_chart_estimated_hours) %>:<%= data.estimated_hours %>
+    </div>
+    <div>
+      <%= link_to l(:parking_lot_chart_closed) + data.closed_issues_count.to_s, {:controller => 'issues', :fixed_version_id => data.id, :set_filter => 1, :status_id => "c"} %>
+      /
+      <%= link_to l(:parking_lot_chart_open) + data.open_issues_count.to_s, {:controller => 'issues', :fixed_version_id => data.id, :set_filter => 1, :status_id => "o"} %>
+    </div>
+    <div>
+      <%= l(:parking_lot_chart_effective_date) %>:<%= data.effective_date %>
+    </div>
+    <div>
+      <table class="progress" style="width: 100%;">
+        <tr>
+          <% if data.closed_issues_count == 0 || data.open_issues_count + data.closed_issues_count == 0 %>
+            <td class="todo" style="width:100%;"></td>
+          <% elsif data.closed_issues_count >= 1 && data.open_issues_count == 0 %>
+            <td style="background-color: red; width:100%;"></td>
+          <% else %>
+            <td style="background-color: red; width: <%= data.closed_issues_pourcent %>%;"></td>
+            <td class="todo" style="width: <%= data.open_issues_pourcent %>%;"></td>
+          <% end %>
+        </tr>
+      </table>
+    </div>
+  </div>
+<% end %>
+    
+<br style="clear:both" />

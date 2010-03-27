@@ -1,0 +1,2 @@
+module ParkingLotChartHelper
+end
