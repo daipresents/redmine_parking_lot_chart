@@ -9,10 +9,16 @@
 (The author is not good at English.Sorry..)
 
 == Details
-- 開発中です。(Now developing.)
+- プロジェクト内のバージョンをカード形式で表示します。(The version in the project is displayed by the card format.)
 
 == Plugin Instration
-- 開発中です。(Now developing.)
+- Download this plugin.
+- Unpack and move into RAILS_ROOT/vendor/plugins.
+- Rename the plugin directory to parking_lot_chart
+- Restart Redmine.
+- Login and configure the plugin (Administration > Roles and permissions > Permissions report)
+- Configure the project (Project > Settings > Modules).
+- Click to Parking Lot Chart menu.
 
 == Note
 - This plugin works only Redmine 0.9.0 or higher.
