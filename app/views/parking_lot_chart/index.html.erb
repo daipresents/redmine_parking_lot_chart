@@ -1,5 +1,21 @@
 <% html_title "#{@project.name} - " + l(:parking_lot_chart) -%>
 
+<% content_for :sidebar do -%>
+  <h3><%= l(:parking_lot_chart_menu_filter) %></h3>
+  <div<% if params[:status] == 'all' %><%= " style='font-weight:bold'" %><%  end %>>
+    <%= link_to l(:parking_lot_chart_all_version), {:controller => 'parking_lot_chart', :action => 'index', :project_id => @project.identifier, :status => 'all'} %>
+  </div>
+  <div<% if params[:status].nil? %><%= " style='font-weight:bold'" %><%  end %>>
+    <%= link_to l(:parking_lot_chart_open_version), {:controller => 'parking_lot_chart', :action => 'index', :project_id => @project.identifier} %><br />
+  </div>
+  <div<% if params[:status] == 'locked' %><%= " style='font-weight:bold'" %><%  end %>>
+    <%= link_to l(:parking_lot_chart_locked_version), {:controller => 'parking_lot_chart', :action => 'index', :project_id => @project.identifier, :status => 'locked'} %><br />
+  </div>
+  <div<% if params[:status] == 'closed' %><%=  " style='font-weight:bold'" %><%  end %>>
+    <%= link_to l(:parking_lot_chart_closed_version), {:controller => 'parking_lot_chart', :action => 'index', :project_id => @project.identifier, :status => 'closed'} %><br />
+  </div>
+<% end -%>
+
 <% @chart_data.each do |data| %>
   <div style="margin:5px; padding:2px; width:15em; float:left; text-align: center; background-color: #ffffcf; border: 1px solid #ffff55">
     <div style="font-size:1.2em; font-weight:bold; width:100%; border-bottom: 1px solid #ffff55">
@@ -9,9 +25,9 @@
       <%= l(:parking_lot_chart_estimated_hours) %>:<%= data.estimated_hours %>
     </div>
     <div>
-      <%= link_to l(:parking_lot_chart_closed) + data.closed_issues_count.to_s, {:controller => 'issues', :fixed_version_id => data.id, :set_filter => 1, :status_id => "c"} %>
+      <%= link_to l(:parking_lot_chart_closed) + data.closed_issues_count.to_s, {:controller => 'issues', :action => 'index', :project_id => @project.identifier, :fixed_version_id => data.id, :set_filter => 1, :status_id => "c"} %>
       /
-      <%= link_to l(:parking_lot_chart_open) + data.open_issues_count.to_s, {:controller => 'issues', :fixed_version_id => data.id, :set_filter => 1, :status_id => "o"} %>
+      <%= link_to l(:parking_lot_chart_open) + data.open_issues_count.to_s, {:controller => 'issues', :action => 'index', :project_id => @project.identifier, :fixed_version_id => data.id, :set_filter => 1, :status_id => "o"} %>
     </div>
     <div>
       <%= l(:parking_lot_chart_effective_date) %>:<%= data.effective_date %>
