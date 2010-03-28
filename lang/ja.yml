@@ -4,4 +4,11 @@
   parking_lot_chart_estimated_hours: "予定工数"
   parking_lot_chart_effective_date: "期日"
 
+  parking_lot_chart_menu_filter: "フィルタ"
+  parking_lot_chart_all_version: "すべてのバージョン"
+  parking_lot_chart_open_version: "スプリント中のバージョン"
+  parking_lot_chart_locked_version: "ロック中のバージョン"
+  parking_lot_chart_closed_version: "完了したバージョン"
+
   parking_lot_chart_project_not_found: "プロジェクトが存在しません。プロジェクトID:{{project_id}}"
+

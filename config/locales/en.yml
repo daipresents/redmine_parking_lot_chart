@@ -1,8 +1,14 @@
 en:
   parking_lot_chart: "Parking Lot Chart"
-  parking_lot_chart_closed: "Closed "
-  parking_lot_chart_open: "Open "
+  parking_lot_chart_closed: "Closed"
+  parking_lot_chart_open: "Open"
   parking_lot_chart_estimated_hours: "Estimated Hours"
   parking_lot_chart_effective_date: "Effective Date"
 
-  parking_lot_chart_project_not_found: "Project Not Found. Project id:{{project_id}}"
+  parking_lot_chart_menu_filter: "Filter"
+  parking_lot_chart_all_version: "All Version"
+  parking_lot_chart_open_version: "Sprint Version"
+  parking_lot_chart_locked_version: "Locked Version"
+  parking_lot_chart_closed_version: "Closed Version"
+
+  parking_lot_chart_project_not_found: "Project not found. project_id:{{project_id}}"
