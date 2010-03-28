@@ -1,5 +1,30 @@
 <% html_title "#{@project.name} - " + l(:parking_lot_chart) -%>
 
+<% content_for :header_tags do %>
+<style type="text/css">
+    #xsnazzy { background:transparent; margin:0.2em; padding:0.2em; width:13em; height:8em; float:left; }
+    #xsnazzy .xtop, #xsnazzy .xbottom {display:block; background:transparent; font-size:1px; }
+    #xsnazzy b { display:block; overflow:hidden; }
+    #xsnazzy .xb1, #xsnazzy .xb2, #xsnazzy .xb3 {height:1px; }
+    #xsnazzy .xb2, #xsnazzy .xb3, #xsnazzy .xb4 {background:#f2f9fd; border-left:1px solid #999999; border-right:1px solid #999999; }
+    #xsnazzy .xb1 { margin:0 5px; background:#999999; }
+    #xsnazzy .xb2 { margin:0 3px; border-width:0 2px; }
+    #xsnazzy .xb3 { margin:0 2px; }
+    #xsnazzy .xb4 { height:2px; margin:0 1px; }
+    #xsnazzy .xboxcontent { display:block; background:#f2f9fd; border:0 solid #999999; border-width:0 1px; }
+    #xsnazzy .xboxtitle {
+     font-size:1.2em; font-weight:bold; width:100%; height:40px;
+      text-align:center; border-bottom: 1px solid #999999;
+      overflow:auto;
+    }
+    #xsnazzy .xboxvalue { font-size:0.8em; width:100%; text-align:center;}
+    #xsnazzy .xboxclosed100 { background-color: red; width:100%; }
+    #xsnazzy .xboxopen100 { width:100%; }
+    #xsnazzy .xboxbar { padding-left: 5px; padding-right: 5px }
+    #xsnazzy .xboxbartable { width:100%; height:0.8em; border:1px solid #999999;border-collapse: collapse; border-spacing: 0; }
+</style>
+<% end %>
+
 <% content_for :sidebar do -%>
   <h3><%= l(:parking_lot_chart_menu_filter) %></h3>
   <div<% if params[:status] == 'all' %><%= " style='font-weight:bold'" %><%  end %>>
@@ -17,35 +42,45 @@
 <% end -%>
 
 <% @chart_data.each do |data| %>
-  <div style="margin:5px; padding:2px; width:15em; float:left; text-align: center; background-color: #ffffcf; border: 1px solid #ffff55">
-    <div style="font-size:1.2em; font-weight:bold; width:100%; border-bottom: 1px solid #ffff55">
-      <%= link_to data.name, {:controller => 'versions', :action => 'show', :id => data.id} %>
+  <div id="xsnazzy">
+    <b class="xtop">
+      <b class="xb1" <% if data.late %> style="background-color:#ff6666"<% elsif data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<%  end %>></b>
+      <b class="xb2" <% if data.late %> style="background-color:#ff6666"<% elsif data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<%  end %>></b>
+      <b class="xb3" <% if data.late %> style="background-color:#ff6666"<% elsif data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<%  end %>></b>
+      <b class="xb4" <% if data.late %> style="background-color:#ff6666"<% elsif data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<%  end %>></b>
+    </b>
+    <div class="xboxcontent">
+      <div class="xboxtitle" <% if data.late %> style="background-color:#ff6666"<% elsif data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<%  end %>>
+        <%= link_to data.name, {:controller => 'versions', :action => 'show', :id => data.id} %>
+      </div>
+      <div class="xboxvalue" <% if data.late %> style="background-color:#ff6666"<% elsif data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<%  end %>>
+        <%= l(:parking_lot_chart_estimated_hours) %>:<%= data.estimated_hours %><br />
+        <%= link_to l(:parking_lot_chart_closed) + data.closed_issues_count.to_s, {:controller => 'issues', :action => 'index', :project_id => @project.identifier, :fixed_version_id => data.id, :set_filter => 1, :status_id => "c"} %>
+        /
+        <%= link_to l(:parking_lot_chart_open) + data.open_issues_count.to_s, {:controller => 'issues', :action => 'index', :project_id => @project.identifier, :fixed_version_id => data.id, :set_filter => 1, :status_id => "o"} %><br />
+        <%= l(:parking_lot_chart_effective_date) %>:<% if data.effective_date %><%= data.effective_date %><% else %>---<% end %>
+      </div>
+      <div class="xboxbar" <% if data.late %> style="background-color:#ff6666"<% elsif data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<%  end %>>
+        <table class="xboxbartable">
+          <tr>
+            <% if data.closed_issues_count == 0 || data.open_issues_count + data.closed_issues_count == 0 %>
+              <td class="xboxopen100"></td>
+            <% elsif data.closed_issues_count >= 1 && data.open_issues_count == 0 %>
+              <td class="xboxclosed100"></td>
+            <% else %>
+              <td style="background-color: red; width: <%= data.closed_issues_pourcent %>%;"></td>
+              <td style="width: <%= data.open_issues_pourcent %>%;"></td>
+            <% end %>
+          </tr>
+        </table>
+      </div>
     </div>
-    <div>
-      <%= l(:parking_lot_chart_estimated_hours) %>:<%= data.estimated_hours %>
-    </div>
-    <div>
-      <%= link_to l(:parking_lot_chart_closed) + data.closed_issues_count.to_s, {:controller => 'issues', :action => 'index', :project_id => @project.identifier, :fixed_version_id => data.id, :set_filter => 1, :status_id => "c"} %>
-      /
-      <%= link_to l(:parking_lot_chart_open) + data.open_issues_count.to_s, {:controller => 'issues', :action => 'index', :project_id => @project.identifier, :fixed_version_id => data.id, :set_filter => 1, :status_id => "o"} %>
-    </div>
-    <div>
-      <%= l(:parking_lot_chart_effective_date) %>:<%= data.effective_date %>
-    </div>
-    <div>
-      <table class="progress" style="width: 100%;">
-        <tr>
-          <% if data.closed_issues_count == 0 || data.open_issues_count + data.closed_issues_count == 0 %>
-            <td class="todo" style="width:100%;"></td>
-          <% elsif data.closed_issues_count >= 1 && data.open_issues_count == 0 %>
-            <td style="background-color: red; width:100%;"></td>
-          <% else %>
-            <td style="background-color: red; width: <%= data.closed_issues_pourcent %>%;"></td>
-            <td class="todo" style="width: <%= data.open_issues_pourcent %>%;"></td>
-          <% end %>
-        </tr>
-      </table>
-    </div>
+    <b class="xbottom">
+      <b class="xb4" <% if data.late %> style="background-color:#ff6666"<% elsif data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<%  end %>></b>
+      <b class="xb3" <% if data.late %> style="background-color:#ff6666"<% elsif data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<%  end %>></b>
+      <b class="xb2" <% if data.late %> style="background-color:#ff6666"<% elsif data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<%  end %>></b>
+      <b class="xb1" <% if data.late %> style="background-color:#ff6666"<% elsif data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<%  end %>></b>
+    </b>
   </div>
 <% end %>
     

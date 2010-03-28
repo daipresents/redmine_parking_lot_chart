@@ -21,7 +21,15 @@ class ParkingLotChartController < ApplicationController
       data.closed_issues_count = version.closed_issues_count
       data.effective_date = version.effective_date
       data.status = version.status
-      
+      if version.effective_date
+        if Date.today < version.effective_date
+          data.late = false
+        else
+          data.late = true
+        end
+      else
+        data.late = true
+      end
       data.open_issues_pourcent = calc_open_issues_pourcent(version.id, version.estimated_hours)
       data.closed_issues_pourcent = 100 - data.open_issues_pourcent
       @chart_data.push(data)
