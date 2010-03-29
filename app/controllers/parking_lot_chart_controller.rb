@@ -75,22 +75,22 @@ class ParkingLotChartController < ApplicationController
 
   def find_open_versions
     return @project.versions.find_by_sql([
-          "select * from versions where project_id = #{@project.id} and status = 'open' order by effective_date asc"])
+          "select * from versions where project_id = #{@project.id} and status = 'open' order by effective_date desc"])
   end
 
   def find_closed_versions
     return @versions = @project.versions.find_by_sql([
-          "select * from versions where project_id = #{@project.id} and status = 'closed' order by effective_date asc"])
+          "select * from versions where project_id = #{@project.id} and status = 'closed' order by effective_date desc"])
   end
 
   def find_locked_versions
     return @versions = @project.versions.find_by_sql([
-          "select * from versions where project_id = #{@project.id} and status = 'locked' order by effective_date asc"])
+          "select * from versions where project_id = #{@project.id} and status = 'locked' order by effective_date desc"])
   end
 
   def find_all_versions
     return @versions = @project.versions.find_by_sql([
-          "select * from versions where project_id = #{@project.id} order by effective_date asc"])
+          "select * from versions where project_id = #{@project.id} order by effective_date desc"])
   end
 
   private

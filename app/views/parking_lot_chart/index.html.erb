@@ -44,23 +44,23 @@
 <% @chart_data.each do |data| %>
   <div id="xsnazzy">
     <b class="xtop">
-      <b class="xb1" <% if data.late %> style="background-color:#ff6666"<% elsif data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<%  end %>></b>
-      <b class="xb2" <% if data.late %> style="background-color:#ff6666"<% elsif data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<%  end %>></b>
-      <b class="xb3" <% if data.late %> style="background-color:#ff6666"<% elsif data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<%  end %>></b>
-      <b class="xb4" <% if data.late %> style="background-color:#ff6666"<% elsif data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<%  end %>></b>
+      <b class="xb1" <% if data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<% elsif data.late %> style="background-color:#ff6666"<%  end %>></b>
+      <b class="xb2" <% if data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<% elsif data.late %> style="background-color:#ff6666"<%  end %>></b>
+      <b class="xb3" <% if data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<% elsif data.late %> style="background-color:#ff6666"<%  end %>></b>
+      <b class="xb4" <% if data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<% elsif data.late %> style="background-color:#ff6666"<%  end %>></b>
     </b>
     <div class="xboxcontent">
-      <div class="xboxtitle" <% if data.late %> style="background-color:#ff6666"<% elsif data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<%  end %>>
+      <div class="xboxtitle" <% if data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<% elsif data.late %> style="background-color:#ff6666"<%  end %>>
         <%= link_to data.name, {:controller => 'versions', :action => 'show', :id => data.id} %>
       </div>
-      <div class="xboxvalue" <% if data.late %> style="background-color:#ff6666"<% elsif data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<%  end %>>
+      <div class="xboxvalue" <% if data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<% elsif data.late %> style="background-color:#ff6666"<%  end %>>
         <%= l(:parking_lot_chart_estimated_hours) %>:<%= data.estimated_hours %><br />
         <%= link_to l(:parking_lot_chart_closed) + data.closed_issues_count.to_s, {:controller => 'issues', :action => 'index', :project_id => @project.identifier, :fixed_version_id => data.id, :set_filter => 1, :status_id => "c"} %>
         /
         <%= link_to l(:parking_lot_chart_open) + data.open_issues_count.to_s, {:controller => 'issues', :action => 'index', :project_id => @project.identifier, :fixed_version_id => data.id, :set_filter => 1, :status_id => "o"} %><br />
         <%= l(:parking_lot_chart_effective_date) %>:<% if data.effective_date %><%= data.effective_date %><% else %>---<% end %>
       </div>
-      <div class="xboxbar" <% if data.late %> style="background-color:#ff6666"<% elsif data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<%  end %>>
+      <div class="xboxbar" <% if data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<% elsif data.late %> style="background-color:#ff6666"<%  end %>>
         <table class="xboxbartable">
           <tr>
             <% if data.closed_issues_count == 0 || data.open_issues_count + data.closed_issues_count == 0 %>
@@ -76,10 +76,10 @@
       </div>
     </div>
     <b class="xbottom">
-      <b class="xb4" <% if data.late %> style="background-color:#ff6666"<% elsif data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<%  end %>></b>
-      <b class="xb3" <% if data.late %> style="background-color:#ff6666"<% elsif data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<%  end %>></b>
-      <b class="xb2" <% if data.late %> style="background-color:#ff6666"<% elsif data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<%  end %>></b>
-      <b class="xb1" <% if data.late %> style="background-color:#ff6666"<% elsif data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<%  end %>></b>
+      <b class="xb4" <% if data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<% elsif data.late %> style="background-color:#ff6666"<%  end %>></b>
+      <b class="xb3" <% if data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<% elsif data.late %> style="background-color:#ff6666"<%  end %>></b>
+      <b class="xb2" <% if data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<% elsif data.late %> style="background-color:#ff6666"<%  end %>></b>
+      <b class="xb1" <% if data.status == 'closed' %> style="background-color:#cccccc"<% elsif data.status == 'locked' %> style="background-color:#ffff66"<% elsif data.late %> style="background-color:#ff6666"<%  end %>></b>
     </b>
   </div>
 <% end %>
