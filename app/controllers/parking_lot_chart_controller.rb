@@ -3,9 +3,16 @@ require 'parking_lot_chart_data'
 class ParkingLotChartController < ApplicationController
   unloadable
   menu_item :parking_lot_chart
-  before_filter :find_project, :find_issues_open_status
+  before_filter :find_project, :find_issues_open_status, :find_all_versions
 
+  DEBUG = true
+  
   def index
+    if DEBUG
+      @today = Date::new(2010, 3, 8)
+    else
+      @today = Date.today
+    end
     versions = find_versions
     @chart_data = []
     versions.each do |version|
@@ -22,13 +29,17 @@ class ParkingLotChartController < ApplicationController
       data.effective_date = version.effective_date
       data.status = version.status
       if version.effective_date
-        if Date.today < version.effective_date
-          data.late = false
+        if version.effective_date <= @today
+          data.issues_status = "late"
+        elsif data.open_issues_count == 0 && 0 < data.closed_issues_count
+          data.issues_status = "closed"
+        elsif (data.effective_date - 6) <= @today
+          data.issues_status = "one more week"
         else
-          data.late = true
+          data.issues_status = "relax"
         end
       else
-        data.late = true
+        data.issues_status = "late"
       end
       data.open_issues_pourcent = calc_open_issues_pourcent(version.id, version.estimated_hours)
       data.closed_issues_pourcent = 100 - data.open_issues_pourcent
@@ -65,8 +76,10 @@ class ParkingLotChartController < ApplicationController
         return find_closed_versions
       elsif params[:status] == "locked"
         return find_locked_versions
+      elsif params[:status] == "no_effective_date"
+        return find_no_effectvie_date_versions
       elsif params[:status] == "all"
-        return find_all_versions
+        return @versions
       else
         return find_open_versions
       end
@@ -74,23 +87,23 @@ class ParkingLotChartController < ApplicationController
   end
 
   def find_open_versions
-    return @project.versions.find_by_sql([
-          "select * from versions where project_id = #{@project.id} and status = 'open' order by effective_date desc"])
+    return @versions.select{|version| version.status == "open"}
   end
 
   def find_closed_versions
-    return @versions = @project.versions.find_by_sql([
-          "select * from versions where project_id = #{@project.id} and status = 'closed' order by effective_date desc"])
+    return @versions.select{|version| version.status == "closed"}
   end
 
   def find_locked_versions
-    return @versions = @project.versions.find_by_sql([
-          "select * from versions where project_id = #{@project.id} and status = 'locked' order by effective_date desc"])
+    return @versions.select{|version| version.status == "locked"}
+  end
+
+  def find_no_effectvie_date_versions
+    return @project.versions.select{|version| !version.effective_date}
   end
 
   def find_all_versions
-    return @versions = @project.versions.find_by_sql([
-          "select * from versions where project_id = #{@project.id} order by effective_date desc"])
+    @versions = @project.versions.select(&:effective_date).sort_by(&:effective_date)
   end
 
   private

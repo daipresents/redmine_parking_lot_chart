@@ -10,6 +10,7 @@ ja:
   parking_lot_chart_open_version: "スプリント中のバージョン"
   parking_lot_chart_locked_version: "ロック中のバージョン"
   parking_lot_chart_closed_version: "完了したバージョン"
+  parking_lot_chart_no_effective_date_version: "期限のないバージョン"
 
   parking_lot_chart_project_not_found: "プロジェクトが存在しません。プロジェクトID:{{project_id}}"
 

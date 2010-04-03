@@ -11,7 +11,7 @@
 == Details
 - プロジェクト内のバージョンをカード形式で表示します。(The version in the project is displayed by the card format.)
 
-== Plugin Instration
+== Plugin Installation
 - Download this plugin.
 - Unpack and move into RAILS_ROOT/vendor/plugins.
 - Rename the plugin directory to parking_lot_chart

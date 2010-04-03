@@ -9,5 +9,6 @@
   parking_lot_chart_open_version: "Sprint Version"
   parking_lot_chart_locked_version: "Locked Version"
   parking_lot_chart_closed_version: "Closed Version"
+  parking_lot_chart_no_effective_date_version: "No Effective Date"
 
   parking_lot_chart_project_not_found: "Project not found. project_id:{{project_id}}"
