@@ -5,7 +5,14 @@ en:
   parking_lot_chart_estimated_hours: "Estimated Hours"
   parking_lot_chart_effective_date: "Effective Date"
 
+  parking_lot_chart_menu_info: "Information"
   parking_lot_chart_menu_filter: "Filter"
+  parking_lot_chart_menu_today: "Today:{{today}}"
+  parking_lot_chart_menu_color_late: "Delay"
+  parking_lot_chart_menu_color_1week: "Anothre week"
+  parking_lot_chart_menu_color_relax: "Everything OK?"
+  parking_lot_chart_menu_color_closed: "Closed"
+  
   parking_lot_chart_all_version: "All Version"
   parking_lot_chart_open_version: "Sprint Version"
   parking_lot_chart_locked_version: "Locked Version"

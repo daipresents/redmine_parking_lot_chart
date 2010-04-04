@@ -2,7 +2,7 @@
 
 <% content_for :header_tags do %>
 <style type="text/css">
-    .versionbox { float:left; width: 130px; height:90px; margin:3px; padding: 2px; border: 1px solid #999999;}
+    .versionbox { float:left; width: 120px; height:90px; margin:3px; padding: 2px; border: 1px solid #999999;}
     .versionboxtitle {
      font-size:1.2em; font-weight:bold; width:100%; height:40px;
       text-align:center; border-bottom: 1px solid #999999;
@@ -17,11 +17,15 @@
 <% end %>
 
 <% content_for :sidebar do -%>
-  <div><%= @today %></div>
-  <h3><%= l(:parking_lot_chart_menu_filter) %></h3>
-  <div<% if params[:status] == 'all' %><%= " style='font-weight:bold'" %><%  end %>>
-    <%= link_to l(:parking_lot_chart_all_version), {:controller => 'parking_lot_chart', :action => 'index', :project_id => @project.identifier, :status => 'all'} %>
+  <h3><%= l(:parking_lot_chart_menu_info) %></h3>
+  <div><%= l(:parking_lot_chart_menu_today, :today => @today) %></div>
+  <div>
+    <div><span style="height:1em;width:2em;background-color: #ff6666">&nbsp;&nbsp;&nbsp;</span> <%= l(:parking_lot_chart_menu_color_late) %></div>
+    <div><span style="height:1em;width:1.2em;background-color: #ffff66">&nbsp;&nbsp;&nbsp;</span> <%= l(:parking_lot_chart_menu_color_1week) %></div>
+    <div><span style="height:1em;width:1.2em;background-color: #ccffff">&nbsp;&nbsp;&nbsp;</span> <%= l(:parking_lot_chart_menu_color_relax) %> </div>
+    <div><span style="height:1em;width:1.2em;background-color: #cccccc">&nbsp;&nbsp;&nbsp;</span> <%= l(:parking_lot_chart_menu_color_closed) %> </div>
   </div>
+  <h3><%= l(:parking_lot_chart_menu_filter) %></h3>
   <div<% if params[:status].nil? %><%= " style='font-weight:bold'" %><%  end %>>
     <%= link_to l(:parking_lot_chart_open_version), {:controller => 'parking_lot_chart', :action => 'index', :project_id => @project.identifier} %><br />
   </div>
@@ -30,6 +34,10 @@
   </div>
   <div<% if params[:status] == 'closed' %><%=  " style='font-weight:bold'" %><%  end %>>
     <%= link_to l(:parking_lot_chart_closed_version), {:controller => 'parking_lot_chart', :action => 'index', :project_id => @project.identifier, :status => 'closed'} %><br />
+  </div>
+  <p/>
+  <div<% if params[:status] == 'all' %><%= " style='font-weight:bold'" %><%  end %>>
+    <%= link_to l(:parking_lot_chart_all_version), {:controller => 'parking_lot_chart', :action => 'index', :project_id => @project.identifier, :status => 'all'} %>
   </div>
   <div<% if params[:status] == 'no_effective_date' %><%=  " style='font-weight:bold'" %><%  end %>>
     <%= link_to l(:parking_lot_chart_no_effective_date_version), {:controller => 'parking_lot_chart', :action => 'index', :project_id => @project.identifier, :status => 'no_effective_date'} %><br />
@@ -45,9 +53,9 @@
     elsif data.issues_status == 'one more week'
       style = "background-color:#ffff66;"
     elsif data.issues_status == 'relax'
-      style = "background-color:#f2f9fd;"
+      style = "background-color:#ccffff;"
     else
-      style = "background-color:#f2f9fd;"
+      style = "background-color:#ccffff;"
     end
   %>
   <div class="versionbox" style="<%= style %>">

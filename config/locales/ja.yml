@@ -5,7 +5,14 @@ ja:
   parking_lot_chart_estimated_hours: "予定工数"
   parking_lot_chart_effective_date: "期日"
 
+  parking_lot_chart_menu_info: "Information"
   parking_lot_chart_menu_filter: "フィルタ"
+  parking_lot_chart_menu_today: "今日は{{today}}です。"
+  parking_lot_chart_menu_color_late: "遅延発生"
+  parking_lot_chart_menu_color_1week: "残り1週間を切りました"
+  parking_lot_chart_menu_color_relax: "残り1週間以上です"
+  parking_lot_chart_menu_color_closed: "完了"
+  
   parking_lot_chart_all_version: "すべてのバージョン"
   parking_lot_chart_open_version: "スプリント中のバージョン"
   parking_lot_chart_locked_version: "ロック中のバージョン"
