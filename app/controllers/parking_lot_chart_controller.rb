@@ -5,7 +5,7 @@ class ParkingLotChartController < ApplicationController
   menu_item :parking_lot_chart
   before_filter :find_project, :find_issues_open_status, :find_all_versions
 
-  DEBUG = true
+  DEBUG = false
   
   def index
     if DEBUG
