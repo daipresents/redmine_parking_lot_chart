@@ -29,10 +29,10 @@ class ParkingLotChartController < ApplicationController
       data.effective_date = version.effective_date
       data.status = version.status
       if version.effective_date
-        if version.effective_date <= @today
-          data.issues_status = "late"
-        elsif data.open_issues_count == 0 && 0 < data.closed_issues_count
+        if data.open_issues_count == 0 && 0 < data.closed_issues_count
           data.issues_status = "closed"
+        elsif version.effective_date <= @today
+          data.issues_status = "late"
         elsif (data.effective_date - 6) <= @today
           data.issues_status = "one more week"
         else
