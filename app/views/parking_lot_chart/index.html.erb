@@ -21,6 +21,7 @@
   <div><%= l(:parking_lot_chart_menu_today, :today => @today) %></div>
   <div>
     <div><span style="height:1em;width:2em;background-color: #ff6666">&nbsp;&nbsp;&nbsp;</span> <%= l(:parking_lot_chart_menu_color_late) %></div>
+    <div><span style="height:1em;width:2em;background-color: #ff9900">&nbsp;&nbsp;&nbsp;</span> <%= l(:parking_lot_chart_menu_color_pinch) %></div>
     <div><span style="height:1em;width:1.2em;background-color: #ffff66">&nbsp;&nbsp;&nbsp;</span> <%= l(:parking_lot_chart_menu_color_1week) %></div>
     <div><span style="height:1em;width:1.2em;background-color: #ccffff">&nbsp;&nbsp;&nbsp;</span> <%= l(:parking_lot_chart_menu_color_relax) %> </div>
     <div><span style="height:1em;width:1.2em;background-color: #cccccc">&nbsp;&nbsp;&nbsp;</span> <%= l(:parking_lot_chart_menu_color_closed) %> </div>
@@ -46,10 +47,12 @@
 
 <% @chart_data.each do |data| %>
   <%
-    if data.issues_status == 'late'
-      style = "background-color:#ff6666;"
-    elsif data.issues_status == 'closed'
+    if data.issues_status == 'closed'
       style = "background-color:#cccccc;"
+    elsif data.issues_status == 'late'
+      style = "background-color:#ff6666;"
+    elsif data.issues_status == 'pinch'
+      style = "background-color:#ff9900;"
     elsif data.issues_status == 'one more week'
       style = "background-color:#ffff66;"
     elsif data.issues_status == 'relax'

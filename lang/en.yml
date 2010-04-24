@@ -8,6 +8,7 @@
   parking_lot_chart_menu_filter: "Filter"
   parking_lot_chart_menu_today: "Today:{{today}}"
   parking_lot_chart_menu_color_late: "Delay"
+  parking_lot_chart_menu_color_pinch: "Pinch"
   parking_lot_chart_menu_color_1week: "Anothre week"
   parking_lot_chart_menu_color_relax: "Everything OK?"
   parking_lot_chart_menu_color_closed: "Closed"

@@ -8,7 +8,7 @@ Redmine::Plugin.register :redmine_parking_lot_chart do
   url 'http://daipresents.com/weblog/fujihalab/archives/2010/03/redmine-parking-lot-chart-plugin.php'
 
   requires_redmine :version_or_higher => '0.9.0'
-  version '0.0.5'
+  version '0.0.6'
 
   project_module :parking_lot_chart do
     permission :parking_lot_chart_view, :parking_lot_chart => :index

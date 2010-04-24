@@ -8,6 +8,7 @@
   parking_lot_chart_menu_filter: "フィルタ"
   parking_lot_chart_menu_today: "今日は{{today}}です。"
   parking_lot_chart_menu_color_late: "遅延発生"
+  parking_lot_chart_menu_color_pinch: "ピンチ"
   parking_lot_chart_menu_color_1week: "残り1週間を切りました"
   parking_lot_chart_menu_color_relax: "残り1週間以上です"
   parking_lot_chart_menu_color_closed: "完了"
