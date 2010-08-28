@@ -1,0 +1,24 @@
+# Translation by Ki Won Kim (http://xyz37.blog.me, xyz37@naver.com)
+ko:
+  parking_lot_chart: "격자 차트"
+  parking_lot_chart_closed: "완료됨"
+  parking_lot_chart_open: "진행"
+  parking_lot_chart_estimated_hours: "평가 시간"
+  parking_lot_chart_effective_date: "유효 일자"
+
+  parking_lot_chart_menu_info: "정보"
+  parking_lot_chart_menu_filter: "필터"
+  parking_lot_chart_menu_today: "오늘:{{today}}"
+  parking_lot_chart_menu_color_late: "지연됨"
+  parking_lot_chart_menu_color_pinch: "막바지"
+  parking_lot_chart_menu_color_1week: "다른 주(week)"
+  parking_lot_chart_menu_color_relax: "모두 정상?"
+  parking_lot_chart_menu_color_closed: "완료됨"
+  
+  parking_lot_chart_all_version: "모든 버전"
+  parking_lot_chart_open_version: "진행중인 버전"
+  parking_lot_chart_locked_version: "잠긴 버전"
+  parking_lot_chart_closed_version: "완료된 버전"
+  parking_lot_chart_no_effective_date_version: "유효 일자 없음"
+
+  parking_lot_chart_project_not_found: "프로젝트가 없습니다. 프로젝트 식별자:{{project_id}}"
