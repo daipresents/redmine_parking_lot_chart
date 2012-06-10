@@ -7,7 +7,7 @@ en:
 
   parking_lot_chart_menu_info: "Information"
   parking_lot_chart_menu_filter: "Filter"
-  parking_lot_chart_menu_today: "Today:{{today}}"
+  parking_lot_chart_menu_today: "Today:%{today}"
   parking_lot_chart_menu_color_late: "Delay"
   parking_lot_chart_menu_color_pinch: "Pinch"
   parking_lot_chart_menu_color_1week: "Another week"
@@ -20,4 +20,4 @@ en:
   parking_lot_chart_closed_version: "Closed Version"
   parking_lot_chart_no_effective_date_version: "No Effective Date"
 
-  parking_lot_chart_project_not_found: "Project not found. project_id:{{project_id}}"
+  parking_lot_chart_project_not_found: "Project not found. project_id:%{project_id}"
