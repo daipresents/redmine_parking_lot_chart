@@ -105,7 +105,8 @@ class ParkingLotChartController < ApplicationController
   end
 
   def find_all_versions
-    @versions = @project.versions.select(&:effective_date).sort_by(&:effective_date)
+    @versions = @project.shared_versions || []
+    @versions = @versions.uniq.sort
   end
 
   private
