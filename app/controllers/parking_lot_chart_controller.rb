@@ -50,6 +50,7 @@ class ParkingLotChartController < ApplicationController
   end
 
   def calc_open_issues_pourcent(version_id, total_hours)
+    return 100 if total_hours == 0
     sum = 0
     @open_statuses.each do |status|
       sum += Issue.sum(:estimated_hours, :conditions => {:fixed_version_id => version_id, :status_id => status.id})
@@ -107,6 +108,7 @@ class ParkingLotChartController < ApplicationController
   def find_all_versions
     @versions = @project.shared_versions || []
     @versions = @versions.uniq.sort
+    #@versions = @project.versions.select(&:effective_date).sort_by(&:effective_date)
   end
 
   private
