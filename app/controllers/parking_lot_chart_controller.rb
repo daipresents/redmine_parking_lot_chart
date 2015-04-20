@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'parking_lot_chart_data'
 
 class ParkingLotChartController < ApplicationController
@@ -45,6 +47,31 @@ class ParkingLotChartController < ApplicationController
       end
       data.open_issues_pourcent = calc_open_issues_pourcent(version.id, version.estimated_hours)
       data.closed_issues_pourcent = 100 - data.open_issues_pourcent
+
+      workday_setting = Setting.plugin_redmine_parking_lot_chart['workday_custom_fields']
+      if !workday_setting.nil?
+        workday_name = CustomField.find_by_id(workday_setting)
+        workday_value = CustomValue.find(:first,
+                                          :select => :value,
+                                          :conditions => ["customized_type = 'Version' AND custom_field_id = ? AND customized_id = ?", workday_setting, version.id]
+                                          )
+        if !workday_name.nil? and !workday_value.nil?
+          data.workday = "#{workday_name.name}:#{workday_value.value} "
+        end
+      end
+
+      day_setting = Setting.plugin_redmine_parking_lot_chart['day_custom_fields']
+      if !day_setting.nil?
+        day_name = CustomField.find_by_id(day_setting)
+        day_value = CustomValue.find(:first,
+                                      :select => :value,
+                                      :conditions => ["customized_type = 'Version' AND custom_field_id = ? AND customized_id = ?", day_setting, version.id]
+                                      )
+        if !day_name.nil? and !day_value.nil?
+          data.day = "#{day_name.name}:#{day_value.value}"
+        end
+      end
+
       @chart_data.push(data)
     end
   end

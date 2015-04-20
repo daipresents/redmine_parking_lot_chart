@@ -16,4 +16,11 @@ Redmine::Plugin.register :redmine_parking_lot_chart do
 
   menu :project_menu, :parking_lot_chart, { :controller => 'parking_lot_chart', :action => 'index' },
   :caption => :parking_lot_chart, :after => :roadmap, :param => :project_id
+
+  # plugin settings
+  settings :default => {
+    'workday_custom_fields' => '',
+    'day_custom_fields' => ''
+  }, :partial => 'parking_lot_chart/plugin_settings'
+
 end

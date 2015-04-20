@@ -1,0 +1,9 @@
+- workday_custom_fields = VersionCustomField.find :all
+- workday_select_options = '<option value=""> </option>' << options_from_collection_for_select(workday_custom_fields, :id, :name, @settings['workday_custom_fields'].to_i)
+- day_custom_fields = VersionCustomField.find :all
+- day_select_options = '<option value=""> </option>' << options_from_collection_for_select(day_custom_fields, :id, :name, @settings['day_custom_fields'].to_i)
+%h2= l(:label_plugin_settings)
+%p
+  %label= l(:label_settings_parking_lot_chart)
+  = select_tag 'settings[workday_custom_fields]', workday_select_options.html_safe
+  = select_tag 'settings[day_custom_fields]', day_select_options.html_safe
