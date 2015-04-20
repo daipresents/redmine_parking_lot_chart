@@ -22,3 +22,6 @@ ja:
 
   parking_lot_chart_project_not_found: "プロジェクトが存在しません。プロジェクトID:%{project_id}"
 
+  label_plugin_settings: "プラグイン設定(カスタムフィールドの紐付け)"
+  label_settings_parking_lot_chart: "表示するカスタムフィールド"
+

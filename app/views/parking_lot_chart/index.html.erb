@@ -1,30 +1,18 @@
 <% html_title "#{@project.name} - " + l(:parking_lot_chart) -%>
 
 <% content_for :header_tags do %>
-<style type="text/css">
-    .versionbox { float:left; width: 120px; height:100px; margin:3px; padding: 2px; border: 1px solid #999999;}
-    .versionboxtitle {
-     font-size:1.2em; font-weight:bold; width:100%; height:40px;
-      text-align:center; border-bottom: 1px solid #999999;
-      overflow:auto;
-    }
-    .versionboxvalue { font-size:0.8em; width:100%; text-align:center;}
-    .versionboxbar { padding-left: 5px; padding-right: 5px }
-    .versionboxbartable { width:100%; height:0.8em; border:1px solid #999999;border-collapse: collapse; border-spacing: 0; }
-    .versionboxclosed100 { background-color: #666666; width:100%; }
-    .versionboxopen100 { width:100%; }
-</style>
+  <%= stylesheet_link_tag 'parking_lot_chart', :plugin => 'redmine_parking_lot_chart', :media => 'all' %>
 <% end %>
 
 <% content_for :sidebar do -%>
   <h3><%= l(:parking_lot_chart_menu_info) %></h3>
   <div><%= l(:parking_lot_chart_menu_today, :today => @today) %></div>
   <div>
-    <div><span style="height:1em;width:2em;background-color: #ff6666">&nbsp;&nbsp;&nbsp;</span> <%= l(:parking_lot_chart_menu_color_late) %></div>
-    <div><span style="height:1em;width:2em;background-color: #ff9900">&nbsp;&nbsp;&nbsp;</span> <%= l(:parking_lot_chart_menu_color_pinch) %></div>
-    <div><span style="height:1em;width:1.2em;background-color: #ffff66">&nbsp;&nbsp;&nbsp;</span> <%= l(:parking_lot_chart_menu_color_1week) %></div>
-    <div><span style="height:1em;width:1.2em;background-color: #ccffff">&nbsp;&nbsp;&nbsp;</span> <%= l(:parking_lot_chart_menu_color_relax) %> </div>
-    <div><span style="height:1em;width:1.2em;background-color: #cccccc">&nbsp;&nbsp;&nbsp;</span> <%= l(:parking_lot_chart_menu_color_closed) %> </div>
+    <div><span class="<%= "late" %>" style="height:1em;width:2em">&nbsp;&nbsp;&nbsp;</span> <%= l(:parking_lot_chart_menu_color_late) %></div>
+    <div><span class="<%= "pinch" %>" style="height:1em;width:2em">&nbsp;&nbsp;&nbsp;</span> <%= l(:parking_lot_chart_menu_color_pinch) %></div>
+    <div><span class="<%= "one_more_week" %>" style="height:1em;width:1.2em">&nbsp;&nbsp;&nbsp;</span> <%= l(:parking_lot_chart_menu_color_1week) %></div>
+    <div><span class="<%= "relax" %>" style="height:1em;width:1.2em">&nbsp;&nbsp;&nbsp;</span> <%= l(:parking_lot_chart_menu_color_relax) %> </div>
+    <div><span class="<%= "closed" %>" style="height:1em;width:1.2em">&nbsp;&nbsp;&nbsp;</span> <%= l(:parking_lot_chart_menu_color_closed) %> </div>
   </div>
   <h3><%= l(:parking_lot_chart_menu_filter) %></h3>
   <div<% if params[:status].nil? %><%= " style='font-weight:bold'" %><%  end %>>
@@ -48,20 +36,20 @@
 <% @chart_data.each do |data| %>
   <%
     if data.issues_status == 'closed'
-      style = "background-color:#cccccc;"
+      bgclass = "closed"
     elsif data.issues_status == 'late'
-      style = "background-color:#ff6666;"
+      bgclass = "late"
     elsif data.issues_status == 'pinch'
-      style = "background-color:#ff9900;"
+      bgclass = "pinch"
     elsif data.issues_status == 'one more week'
-      style = "background-color:#ffff66;"
+      bgclass = "one_more_week"
     elsif data.issues_status == 'relax'
-      style = "background-color:#ccffff;"
+      bgclass = "relax"
     else
-      style = "background-color:#ccffff;"
+      bgclass = "other"
     end
   %>
-  <div class="versionbox" style="<%= style %>">
+  <div class="versionbox <%= bgclass %>">
     <div class="versionboxtitle">
       <%= link_to data.name, {:controller => 'versions', :action => 'show', :id => data.id} %>
     </div>
@@ -70,7 +58,9 @@
       <%= link_to l(:parking_lot_chart_closed) + data.closed_issues_count.to_s, {:controller => 'issues', :action => 'index', :project_id => @project.identifier, :fixed_version_id => data.id, :set_filter => 1, :status_id => "c"} %>
       /
       <%= link_to l(:parking_lot_chart_open) + data.open_issues_count.to_s, {:controller => 'issues', :action => 'index', :project_id => @project.identifier, :fixed_version_id => data.id, :set_filter => 1, :status_id => "o"} %><br />
-      <%= l(:parking_lot_chart_effective_date) %>:<% if data.effective_date %><%= data.effective_date %><% else %>---<% end %>
+      <%= l(:parking_lot_chart_effective_date) %>:<% if data.effective_date %><%= data.effective_date %><% else %>---<% end %><br />
+      <% if data.workday %><%= data.workday %><br /><% end %>
+      <% if data.day %><%= data.day %><% end %>
     </div>
     <div class="versionboxbar">
       <table class="versionboxbartable">

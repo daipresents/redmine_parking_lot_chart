@@ -21,3 +21,6 @@ en:
   parking_lot_chart_no_effective_date_version: "No Effective Date"
 
   parking_lot_chart_project_not_found: "Project not found. project_id:%{project_id}"
+
+  label_plugin_settings: "parking lot chart settings(custom_fields)"
+  label_setting_parking_lot_chart: "view custom fields for parking lot chart"
